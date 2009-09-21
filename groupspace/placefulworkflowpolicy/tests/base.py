@@ -74,6 +74,10 @@ class WorkflowFunctionalTestCase(FunctionalTestCase):
         self.folder.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
         config = getattr(self.folder.aq_explicit, WorkflowPolicyConfig_id)
         config.setPolicyBelow(policy='default_placeful_workflow')
+        self.document.reindexObjectSecurity()
+        self.folder.reindexObjectSecurity()
+        self.newsitem.reindexObjectSecurity()
+        self.event.reindexObjectSecurity()
         
     def setUpGroupSpaceWorkflowPolicy(self, defaultWorkflow=None):
         # Setup a GroupSpace workflow policy
@@ -89,4 +93,7 @@ class WorkflowFunctionalTestCase(FunctionalTestCase):
         self.folder.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
         config = getattr(self.folder.aq_explicit, WorkflowPolicyConfig_id)
         config.setPolicyBelow(policy='groupspace_placeful_workflow')
-        
+        self.document.reindexObjectSecurity()
+        self.folder.reindexObjectSecurity()
+        self.newsitem.reindexObjectSecurity()
+        self.event.reindexObjectSecurity()
