@@ -1,0 +1,66 @@
+====================================================
+Functional Testing of the GroupSpace Workflow Policy
+====================================================
+
+Verify that our items are actually all in the simple_publication_workflow and 
+in our default 'private' state
+
+    >>> self.workflow.getChainForPortalType('Folder')
+    ('simple_publication_workflow',)
+    >>> self.workflow.getChainForPortalType('Document')
+    ('simple_publication_workflow',)
+    >>> self.workflow.getChainForPortalType('News Item')
+    ('simple_publication_workflow',)
+    >>> self.workflow.getChainForPortalType('Event')
+    ('simple_publication_workflow',)
+
+    >>> self.workflow.getInfoFor(self.folder, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.document1, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.event1, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.newsitem1, 'review_state')
+    'private'
+
+First, we use the default placeful workflow policy from CMFPlacefulWorkflow:
+
+    >>> self.setUpDefaultWorkflowPolicy(defaultWorkflow='one_state_workflow')
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+    
+Let us log all exceptions, which is useful for debugging.
+
+    >>> self.portal.error_log._ignored_exceptions = ()
+
+The default workflow, as defined in the workflow policy, is not respected:
+
+    >>> self.workflow.getInfoFor(self.folder, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.document1, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.event1, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.newsitem1, 'review_state')
+    'private'
+
+Finally, demonstrate how the behaviour of the groupspace placeful workflow 
+policy respects the default setting:
+
+    >>> self.setUpGroupSpaceWorkflowPolicy(defaultWorkflow='one_state_workflow')
+    >>> from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+    >>> browser.handleErrors = False
+
+    >>> self.workflow.getInfoFor(self.folder, 'review_state')
+    'private'
+    >>> self.workflow.getInfoFor(self.folder.document1, 'review_state')
+    'published'
+    >>> self.workflow.getInfoFor(self.folder.event1, 'review_state')
+    'published'
+    >>> self.workflow.getInfoFor(self.folder.newsitem1, 'review_state')
+    'published'
+
+
+
