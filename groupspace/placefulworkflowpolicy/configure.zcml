@@ -3,5 +3,13 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="groupspace.placefulworkflowpolicy">
 
+    <!-- Event handlers -->
+
+    <subscriber
+        for=".interfaces.ILocalGroupSpaceWorkflow
+             zope.app.container.interfaces.IObjectAddedEvent"
+        handler=".handlers.add_local_groupspace_workflow"
+        />
 
 </configure>
+
