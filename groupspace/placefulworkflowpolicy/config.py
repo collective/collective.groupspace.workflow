@@ -1,0 +1,3 @@
+GROUPSPACE_PLACEFUL_WORKFLOW_POLICY = 'groupspace_placeful_workflow'
+GROUPSPACE_CONTENT_PLACEFUL_WORKFLOW_POLICY = 'groupspace_content_placeful_workflow'
+
