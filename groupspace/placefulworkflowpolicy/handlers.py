@@ -1,6 +1,7 @@
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
-from Products.GrufSpaces.config import PLACEFUL_WORKFLOW_POLICY
+from groupspace.placefulworkflowpolicy.config import GROUPSPACE_CONTENT_PLACEFUL_WORKFLOW_POLICY
+from groupspace.placefulworkflowpolicy.config import GROUPSPACE_PLACEFUL_WORKFLOW_POLICY
 from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
         
 def add_local_groupspace_workflow(groupspace, event):
@@ -20,5 +21,5 @@ def add_local_groupspace_workflow(groupspace, event):
     # the permission check:
     #
     config = getattr(groupspace.aq_explicit, WorkflowPolicyConfig_id)
-    config.setPolicyBelow(policy=PLACEFUL_WORKFLOW_POLICY)
-        
+    config.setPolicyIn(policy=GROUPSPACE_PLACEFUL_WORKFLOW_POLICY)
+    config.setPolicyBelow(policy=GROUPSPACE_CONTENT_PLACEFUL_WORKFLOW_POLICY)       
