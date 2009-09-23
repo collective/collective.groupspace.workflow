@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<import-steps>
+                      
+ <import-step id="groupspace.placefulworkflowpolicy_various"
+              version="20080219-01"
+              handler="groupspace.placefulworkflowpolicy.setuphandlers.setupVarious"
+              title="groupspace.placefulworkflowpolicy: miscellaneous import steps">
+     <dependency step="componentregistry"/>            
+
+ </import-step>
+
+</import-steps>
