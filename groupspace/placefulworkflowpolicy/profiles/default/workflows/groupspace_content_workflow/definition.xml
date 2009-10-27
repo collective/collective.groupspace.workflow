@@ -33,7 +33,7 @@
      <permission-role>GroupContributor</permission-role>
      <permission-role>GroupReader</permission-role>
    </permission-map>
-   <permission-map name="View" acquired="True">
+   <permission-map name="View" acquired="False">
      <permission-role>Owner</permission-role>
      <permission-role>Manager</permission-role>
      <permission-role>GroupAdmin</permission-role>
