@@ -3,7 +3,7 @@
                       
  <import-step id="groupspace.placefulworkflowpolicy_various"
               version="20080219-01"
-              handler="groupspace.placefulworkflowpolicy.setuphandlers.setupVarious"
+              handler="groupspace.placefulworkflowpolicy.setuphandlers.setup_various"
               title="groupspace.placefulworkflowpolicy: miscellaneous import steps">
      <dependency step="componentregistry"/>            
 

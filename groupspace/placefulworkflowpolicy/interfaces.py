@@ -1,3 +1,7 @@
+"""
+Defining a local groupspace workflow interface
+"""
+
 from zope.interface import Interface
 
 class ILocalGroupSpaceWorkflow(Interface):

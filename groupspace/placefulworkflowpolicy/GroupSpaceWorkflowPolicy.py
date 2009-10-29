@@ -1,3 +1,7 @@
+"""
+A workflow policy definition respecting the default workflow
+"""
+
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from zope.interface import implements
@@ -11,7 +15,9 @@ DEFAULT_CHAIN = '(Default)'
 _MARKER = '_MARKER'
 
 class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
-
+    """
+    A workflow policy that respects the default workflow
+    """
     implements(IWorkflowPolicyDefinition)
 
     meta_type = 'GroupSpaceWorkflowPolicy'
@@ -20,7 +26,7 @@ class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
     security = ClassSecurityInfo()
     
     security.declareProtected( ManagePortal, 'getChainFor')
-    def getChainFor(self, ob, managescreen=False):
+    def getChainFor(self, obj, managescreen=False):
         """Returns the chain that applies to the object.
 
         If chain doesn't exist we return None to get a fallback from
@@ -31,44 +37,41 @@ class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
                             chain (hack).
         """
         cbt = self._chains_by_type
-        if type(ob) == type(''):
-            pt = ob
-        elif hasattr(aq_base(ob), '_getPortalTypeName'):
-            pt = ob._getPortalTypeName()
+        if type(obj) == type(''):
+            portal_type = obj
+        elif hasattr(aq_base(obj), '_getPortalTypeName'):
+            portal_type = obj._getPortalTypeName()
         else:
-            pt = None
+            portal_type = None
 
-        if pt is None:
+        if portal_type is None:
             return None
 
         chain = None
         if cbt is not None:
-            chain = cbt.get(pt, _MARKER)
+            chain = cbt.get(portal_type, _MARKER)
 
         # Backwards compatibility: before chain was a string, not a list
         if chain is not _MARKER and type(chain) == type(''):
-            chain = map( lambda x: x.strip(), chain.split(',') )
+            chain = [x.strip() for x in chain.split(',')]
 
         if chain is _MARKER or chain is None:
             # Enforcing a default chain in absence of a definition
             if managescreen:
-                return DEFAULT_CHAIN
+                chain = DEFAULT_CHAIN
             else:
-                return self.getDefaultChain(ob)            
+                chain = self.getDefaultChain(obj)            
         elif len(chain) == 1 and chain[0] == DEFAULT_CHAIN:
-            default = self.getDefaultChain(ob)
-            if default:
-                if managescreen:
-                    return DEFAULT_CHAIN
-                else:
-                    return default
+            chain = self.getDefaultChain(obj)
+            if chain and managescreen:
+                chain = DEFAULT_CHAIN
             else:
-                return None
+                chain = None
 
         return chain
 
     security.declareProtected( ManagePortal, 'getDefaultChain')
-    def getDefaultChain(self, ob):
+    def getDefaultChain(self, obj):
         """ Returns the default chain."""
         # A default chain must be available, otherwise we can't control 
         # access to GroupSpace content.
@@ -77,5 +80,6 @@ class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
 
 InitializeClass(GroupSpaceWorkflowPolicyDefinition)
 
-addWorkflowPolicyFactory(GroupSpaceWorkflowPolicyDefinition, title='GroupSpace Policy')
+addWorkflowPolicyFactory(GroupSpaceWorkflowPolicyDefinition, 
+                         title='GroupSpace Policy')
 
