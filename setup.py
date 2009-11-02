@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-groupspace.placefulworkflowpolicy
+collective.groupspace.workflow
 """
 
 from setuptools import setup, find_packages
@@ -13,7 +13,7 @@ __here__ = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(__here__, 'README.txt')).read()
 CHANGES = open(os.path.join(__here__, 'CHANGES.txt')).read()
 
-setup(name='groupspace.placefulworkflowpolicy',
+setup(name='collective.groupspace.workflow',
     version=__version__,
     description="A placeful workflow policy enforcing a default workflow",
     long_description=README + '\n\n' +  CHANGES,
@@ -33,10 +33,10 @@ setup(name='groupspace.placefulworkflowpolicy',
     keywords='',
     author='Maik Röder',
     author_email='roeder@berg.net',
-    url='http://svn.plone.org/svn/collective/groupspace.placefulworkflowpolicy',
+    url='http://svn.plone.org/svn/collective/collective.groupspace.workflow',
     license='GPL',
     packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['groupspace'],
+    namespace_packages=['collective', 'collective.groupspace'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
