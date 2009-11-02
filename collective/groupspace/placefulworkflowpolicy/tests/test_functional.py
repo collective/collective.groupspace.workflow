@@ -10,6 +10,6 @@ def test_suite():
     for test in tests:
         suite.addTest(FunctionalDocFileSuite(test,
             optionflags=optionflags,
-            package="groupspace.placefulworkflowpolicy.tests",
+            package="collective.groupspace.workflow.tests",
             test_class=WorkflowFunctionalTestCase))
     return suite

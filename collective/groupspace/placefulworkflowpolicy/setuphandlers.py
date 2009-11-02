@@ -1,10 +1,10 @@
 """
-Setup handlers for groupspace.placefulworkflowpolicy
+Setup handlers for collective.groupspace.workflow
 """
 from StringIO import StringIO
 from Products.CMFCore.utils import getToolByName
-from groupspace.placefulworkflowpolicy.config import CONTENT_POLICY
-from groupspace.placefulworkflowpolicy.config import GROUPSPACE_POLICY
+from collective.groupspace.workflow.config import CONTENT_POLICY
+from collective.groupspace.workflow.config import GROUPSPACE_POLICY
 
 def setup_various(context):
     """Import steps that are not handled by GS import/export handlers

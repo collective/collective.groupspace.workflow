@@ -2,7 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="groupspace.placefulworkflowpolicy">
+    i18n_domain="collective.groupspace.workflow">
 
     <!-- Event handlers -->
 
@@ -15,9 +15,9 @@
     <!-- Register the installation GenericSetup extension profile -->
     <genericsetup:registerProfile
         name="default"
-        title="groupspace.placefulworkflowpolicy"
+        title="collective.groupspace.workflow"
         directory="profiles/default"
-        description="Extension profile for default groupspace.placefulworkflowpolicy setup."
+        description="Extension profile for default collective.groupspace.workflow setup."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 

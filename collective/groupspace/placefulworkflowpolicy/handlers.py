@@ -2,8 +2,8 @@
 Handle the setting of policies when a groupspace is added
 """
 
-from groupspace.placefulworkflowpolicy.config import CONTENT_POLICY
-from groupspace.placefulworkflowpolicy.config import GROUPSPACE_POLICY
+from collective.groupspace.workflow.config import CONTENT_POLICY
+from collective.groupspace.workflow.config import GROUPSPACE_POLICY
 from Products.CMFPlacefulWorkflow.PlacefulWorkflowTool import WorkflowPolicyConfig_id
 
 def add_local_groupspace_workflow(obj, event):

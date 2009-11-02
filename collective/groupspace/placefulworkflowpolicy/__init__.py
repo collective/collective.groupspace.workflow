@@ -1,5 +1,5 @@
 """
-groupspace.placefulworkflowpolicy
+collective.groupspace.placefulworkflowpolicy
 """
 
 import GroupSpaceWorkflowPolicy
