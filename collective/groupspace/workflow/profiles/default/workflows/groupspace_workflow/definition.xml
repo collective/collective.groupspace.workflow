@@ -2,7 +2,7 @@
 <dc-workflow workflow_id="groupspace_workflow"
              title="GroupSpace workflow"
              state_variable="review_state"
-             initial_state="visible">
+             initial_state="private">
 
  <permission>GrufSpaces: Assign GroupSpace Roles</permission>
  <permission>GrufSpaces: Send Mail to GroupSpace Members</permission>
@@ -11,8 +11,8 @@
  <permission>Modify portal content</permission>
  <permission>View</permission>
 
- <state state_id="visible"
-        title="Visible">
+ <state state_id="private"
+        title="Private">
   <description>Visible to other logged-in users.</description>
   <permission-map name="GrufSpaces: Assign GroupSpace Roles"
                   acquired="False">
@@ -36,7 +36,6 @@
    <permission-role>GroupEditor</permission-role>
    <permission-role>GroupContributor</permission-role>
    <permission-role>GroupReader</permission-role>
-   <permission-role>Authenticated</permission-role>
   </permission-map>
   <permission-map name="List folder contents"
                   acquired="False">
@@ -46,7 +45,6 @@
    <permission-role>GroupEditor</permission-role>
    <permission-role>GroupContributor</permission-role>
    <permission-role>GroupReader</permission-role>
-   <permission-role>Authenticated</permission-role>
   </permission-map>
   <permission-map name="Modify portal content"
                   acquired="False">
@@ -62,7 +60,6 @@
    <permission-role>GroupEditor</permission-role>
    <permission-role>GroupContributor</permission-role>
    <permission-role>GroupReader</permission-role>
-   <permission-role>Authenticated</permission-role>
   </permission-map>
  </state> 
  
