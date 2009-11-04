@@ -2,21 +2,27 @@
 """
 collective.groupspace.workflow
 """
-
-from setuptools import setup, find_packages
 import os
+from setuptools import setup
+from setuptools import find_packages
 
-__version__  = '1.0'
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-__here__ = os.path.abspath(os.path.dirname(__file__))
+version  = '1.0'
 
-README = open(os.path.join(__here__, 'README.txt')).read()
-CHANGES = open(os.path.join(__here__, 'CHANGES.txt')).read()
+long_description = (
+    read('README.txt')
+    + '\n\n' +
+    read('CHANGES.txt')
+    )
+
+tests_require=['zope.testing']
 
 setup(name='collective.groupspace.workflow',
-    version=__version__,
+    version=version,
     description="A placeful workflow policy enforcing a default workflow",
-    long_description=README + '\n\n' +  CHANGES,
+    long_description=long_description,
     classifiers=[
       "Development Status :: 4 - Beta",
       "Environment :: Web Environment",
@@ -30,7 +36,7 @@ setup(name='collective.groupspace.workflow',
       "Topic :: Office/Business :: Groupware",
       "Topic :: Software Development :: Libraries :: Python Modules",
       ],
-    keywords='',
+    keywords='groupspace, roles, pas, borg.localrole, grufspaces',
     author='Maik Röder',
     author_email='roeder@berg.net',
     url='http://svn.plone.org/svn/collective/collective.groupspace.workflow',
@@ -43,14 +49,13 @@ setup(name='collective.groupspace.workflow',
         'setuptools',
         # -*- Extra requirements: -*-
     ],
+    tests_require=tests_require,
+    extras_require=dict(tests=tests_require),
     entry_points="""
-    # -*- Entry points: -*-
-
-    [distutils.setup_keywords]
-    paster_plugins = setuptools.dist:assert_string_list
-
-    [egg_info.writers]
-    paster_plugins.txt = setuptools.command.egg_info:write_arg
-    """,
+      # -*- entry_points -*-
+      [z3c.autoinclude.plugin]
+      target = plone
+      """,
+    setup_requires=["PasteScript"],
     paster_plugins = ["ZopeSkel"],
     )
