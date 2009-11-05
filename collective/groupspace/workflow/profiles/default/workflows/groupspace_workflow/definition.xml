@@ -4,8 +4,8 @@
              state_variable="review_state"
              initial_state="private">
 
- <permission>GrufSpaces: Assign GroupSpace Roles</permission>
- <permission>GrufSpaces: Send Mail to GroupSpace Members</permission>
+ <permission>collective.groupspace.roles: Assign GroupSpace Roles</permission>
+ <permission>collective.groupspace.mail: Send Mail to Group</permission>
  <permission>Access contents information</permission>
  <permission>List folder contents</permission>
  <permission>Modify portal content</permission>
@@ -14,13 +14,13 @@
  <state state_id="private"
         title="Private">
   <description>Visible to other logged-in users.</description>
-  <permission-map name="GrufSpaces: Assign GroupSpace Roles"
+  <permission-map name="collective.groupspace.roles: Assign GroupSpace Roles"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>GroupAdmin</permission-role>
   </permission-map>
-  <permission-map name="GrufSpaces: Send Mail to GroupSpace Members"
+  <permission-map name="collective.groupspace.mail: Send Mail to Group"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
