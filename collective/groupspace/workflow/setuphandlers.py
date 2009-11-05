@@ -16,7 +16,7 @@ def setup_various(context):
     print >> out, add_groupspace_policy(portal)
     print >> out, augment_permissions(portal)
     
-    logger = context.getLogger("GrufSpaces")
+    logger = context.getLogger("Plone")
     logger.info(out.getvalue())
 
 def add_content_policy(portal):
