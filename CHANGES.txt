@@ -4,7 +4,10 @@
 Backwards Incompatibilities
 ---------------------------
 
-* Rename GroupSpaceWorkflowPolicy.py to policy.py
+* Renamed ``GroupSpaceWorkflowPolicy.py`` to ``policy.py``. To upgrade, go to
+  the ``portal_placeful_workflow`` tool in the ZMI and remove the two policies,
+  ``groupspace_content_placeful_workflow`` and ``groupspace_placeful_workflow``.
+  Then reinstall ``collective.groupspace.workflow``.
 
 1.0 (2009-10-28)
 ================
