@@ -1,3 +1,11 @@
+1.0.1 (2009-11-11)
+==================
+
+Backwards Incompatibilities
+---------------------------
+
+* Rename GroupSpaceWorkflowPolicy.py to policy.py
+
 1.0 (2009-10-28)
 ================
 
