@@ -1,6 +1,12 @@
 Next release
 ============
 
+Documentation
+-------------
+
+- Refactoring and documentation of the ``getChainFor`` method of the 
+  ``GroupSpaceWorkflowPolicyDefinition`` in ``policy.py``. 
+
 Bug Fixes
 ---------
 
