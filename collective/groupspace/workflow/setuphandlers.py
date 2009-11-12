@@ -13,18 +13,20 @@ def setup_various(context):
     out = StringIO()
     portal = context.getSite()
 
-
     placeful_workflow = getToolByName(portal, 'portal_placeful_workflow', None)
-    if placeful_workflow is None:
-        portal.plone_utils.addPortalMessage(_(u'Please install Workflow Policy Support (CMFPlacefulWorkflow) first.'))
-        raise AttributeError('portal_placeful_workflow tool not found')
-        
+    require_placeful_workflow(portal, placeful_workflow)
+            
     print >> out, add_content_policy(portal)
     print >> out, add_groupspace_policy(portal)
     print >> out, augment_permissions(portal)
     
     logger = context.getLogger("Plone")
     logger.info(out.getvalue())
+
+def require_placeful_workflow(portal, placeful_workflow):
+    if placeful_workflow is None:
+        portal.plone_utils.addPortalMessage(_(u'Please install Workflow Policy Support (CMFPlacefulWorkflow) first.'))
+        raise AttributeError #('portal_placeful_workflow tool not found')
 
 def add_content_policy(portal):
     """Add the placeful workflow policy for content of GroupSpaces.
