@@ -36,7 +36,6 @@ class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
                             ('default') instead of the actual default
                             chain (hack).
         """
-        cbt = self._chains_by_type
         if type(obj) == type(''):
             portal_type = obj
         elif hasattr(aq_base(obj), '_getPortalTypeName'):
@@ -45,28 +44,42 @@ class GroupSpaceWorkflowPolicyDefinition(DefaultWorkflowPolicyDefinition):
             portal_type = None
 
         if portal_type is None:
-            return None
-
+            # Objects that don't have a portal type are not handled
+            if managescreen:
+                # In the ZMI management screen, a None value does not look good
+                return ''
+            else:
+                return None
+            
+        # The defined chains for portal types are stored in the _chains_by_type
+        # dictionary on the workflow policy definition
+        cbt = self._chains_by_type
         chain = None
         if cbt is not None:
+            # Get the chains for the content type, or mark the chain as not
+            # existing in the cbt.
             chain = cbt.get(portal_type, _MARKER)
 
-        # Backwards compatibility: before chain was a string, not a list
+        # Backwards compatibility: before chain was a string, not a tuple
         if chain is not _MARKER and type(chain) == type(''):
-            chain = [x.strip() for x in chain.split(',')]
+            chain = tuple([x.strip() for x in chain.split(',')])
 
-        if chain is _MARKER or chain is None:
-            # Enforcing a default chain in absence of a definition
+        if chain in (_MARKER, None, (DEFAULT_CHAIN,)):
+            # The chain is either
+            #
+            # * Not defined in the cbt, and has been marked: _MARKER
+            #
+            # * Undefined, because there is no cbt: None
+            #
+            # * Defined as the default chain in the cbt: (DEFAULT_CHAIN,)
+            #
+            # In all these cases, use the default chain
             if managescreen:
+                # In the ZMI management screen show "(Default)"
                 chain = DEFAULT_CHAIN
             else:
+                # Return the default chain tuple 
                 chain = self.getDefaultChain(obj)            
-        elif len(chain) == 1 and chain[0] == DEFAULT_CHAIN:
-            chain = self.getDefaultChain(obj)
-            if chain and managescreen:
-                chain = DEFAULT_CHAIN
-            else:
-                chain = None
 
         return chain
 
