@@ -21,18 +21,15 @@ from Products.PloneTestCase import PloneTestCase as ptc
 # a portlets profile.
 setupPloneSite()
 
-ptc.setupPloneSite(extension_profiles = ('Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow',))
+ptc.setupPloneSite(extension_profiles = ('Products.CMFPlacefulWorkflow:CMFPlacefulWorkflow',),
+                   products = ('collective.groupspace.workflow',))
 
-class WorkflowTestCase(PloneTestCase):
-    """Base class for integration tests for plone.app.workflow. This may
-    provide specific set-up and tear-down operations, or provide convenience
-    methods.
+class PloneTestCase(PloneTestCase):
+    """Base class for integration tests"
     """
     
-class WorkflowFunctionalTestCase(FunctionalTestCase):
-    """Base class for functional integration tests for plone.app.workflow. 
-    This may provide specific set-up and tear-down operations, or provide 
-    convenience methods.
+class FunctionalTestCase(FunctionalTestCase):
+    """Base class for functional integration tests"
     """
 
     def afterSetUp(self):
@@ -85,9 +82,6 @@ class WorkflowFunctionalTestCase(FunctionalTestCase):
         if WorkflowPolicyConfig_id in self.folder.objectIds():
             # Remove any preexisting workflow policy
             self.folder.manage_delObjects(WorkflowPolicyConfig_id)
-        self.placeful_workflow.manage_addWorkflowPolicy('groupspace_placeful_workflow', 
-                                                   workflow_policy_type='groupspace_workflow_policy (GroupSpace Policy)',
-                                                  )
         policy = self.placeful_workflow.getWorkflowPolicyById('groupspace_placeful_workflow')
         policy.setTitle('GroupSpace content workflows')
         policy.setDefaultChain((defaultWorkflow,))

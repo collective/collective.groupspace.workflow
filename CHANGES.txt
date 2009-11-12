@@ -13,6 +13,11 @@ Bug Fixes
 - Raise an error at installation time if ``CMFPlacefulWorkflow`` has not been 
   installed before
 
+Internal
+--------
+
+- More unit tests
+
 1.0.1 (2009-11-11)
 ==================
 
