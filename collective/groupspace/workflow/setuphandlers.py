@@ -5,13 +5,20 @@ from StringIO import StringIO
 from Products.CMFCore.utils import getToolByName
 from collective.groupspace.workflow.config import CONTENT_POLICY
 from collective.groupspace.workflow.config import GROUPSPACE_POLICY
+from Products.CMFPlone import PloneMessageFactory as _
 
 def setup_various(context):
     """Import steps that are not handled by GS import/export handlers
     """
     out = StringIO()
     portal = context.getSite()
-    
+
+
+    placeful_workflow = getToolByName(portal, 'portal_placeful_workflow', None)
+    if placeful_workflow is None:
+        portal.plone_utils.addPortalMessage(_(u'Please install Workflow Policy Support (CMFPlacefulWorkflow) first.'))
+        raise AttributeError('portal_placeful_workflow tool not found')
+        
     print >> out, add_content_policy(portal)
     print >> out, add_groupspace_policy(portal)
     print >> out, augment_permissions(portal)
@@ -24,11 +31,9 @@ def add_content_policy(portal):
     """
     out = StringIO()
     
-    placeful_workflow = getToolByName(portal, 'portal_placeful_workflow', None)
+    placeful_workflow = getToolByName(portal, 'portal_placeful_workflow')
     
-    if placeful_workflow is None:
-        print >> out, "Error: CMFPlacefulWorkflow is not installed"
-    elif CONTENT_POLICY not in placeful_workflow.objectIds():
+    if CONTENT_POLICY not in placeful_workflow.objectIds():
         wpt = 'groupspace_workflow_policy (GroupSpace Policy)'
         placeful_workflow.manage_addWorkflowPolicy(CONTENT_POLICY,
                                                    workflow_policy_type=wpt)
@@ -46,11 +51,9 @@ def add_groupspace_policy(portal):
     """
     out = StringIO()
     
-    placeful_workflow = getToolByName(portal, 'portal_placeful_workflow', None)
+    placeful_workflow = getToolByName(portal, 'portal_placeful_workflow')
     
-    if placeful_workflow is None:
-        print >> out, "Error: CMFPlacefulWorkflow is not installed"
-    elif GROUPSPACE_POLICY not in placeful_workflow.objectIds():
+    if GROUPSPACE_POLICY not in placeful_workflow.objectIds():
         wpt = 'groupspace_workflow_policy (GroupSpace Policy)'
         placeful_workflow.manage_addWorkflowPolicy(GROUPSPACE_POLICY, 
                                                    workflow_policy_type=wpt)
