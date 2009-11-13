@@ -21,7 +21,7 @@ tests_require=['zope.testing']
 
 setup(name='collective.groupspace.workflow',
     version=version,
-    description="A placeful workflow policy enforcing a default workflow",
+    description="Plone collective.groupspace local workflow for securing private content",
     long_description=long_description,
     classifiers=[
       "Development Status :: 4 - Beta",
