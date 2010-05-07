@@ -1,3 +1,12 @@
+1.0.3 (2010-05-07)
+==================
+
+Internal
+--------
+
+- Fix import in policy.py for Zope 2.12. InitializeClass is deprecated. 
+  import from App.class init instead
+
 1.0.2 (2009-11-12)
 ==================
 
