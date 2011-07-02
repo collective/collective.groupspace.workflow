@@ -1,3 +1,12 @@
+1.0.4 (2011-07-02)
+==================
+
+Internal
+--------
+
+- collective.groupspace.workflow is depending on CMFPlacefulWorkflow, so it should be installed 
+  with it otherwise install breaks (garbas)
+
 1.0.3 (2010-05-07)
 ==================
 
